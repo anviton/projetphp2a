@@ -10,12 +10,13 @@
 		}
 
 		public function listerTousLesFlux(): array {
-			$listeFlux;
+			$listeFlux=[];
 			$requete='SELECT * FROM flux';
-			$this->connect->executeQuery($requete, array());
-			$resultats=$this->connect->getResults();
-			foreach ($resultats as $val) {
-				$listeFlux[]= new Flux($val['idFlux'], $val['nom'], $val['dateDerMaj']);
+			if($this->connect->executeQuery($requete, array())){
+				$resultats=$this->connect->getResults();
+				foreach ($resultats as $val) {
+					$listeFlux[]= new Flux($val['idFlux'], $val['nom'], $val['dateDerMaj']);
+				}
 			}
 			return $listeFlux;
 		}
