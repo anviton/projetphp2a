@@ -1,8 +1,5 @@
 <?php  
 	require_once(__DIR__.'/Config/config.php');
-	
-
-
-
-	$cont = new \Controleur\Controleur();
+	require_once(__DIR__.'/Controleurs/Controleur.php');
+	$cont = new Controleur();
 ?>

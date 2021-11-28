@@ -1,5 +1,5 @@
 <?php
-	//require('Modeles/Metier/News.php');
+	require(__DIR__.'/../Metier/News.php');
 	class NewsGateway{
 		private $connect;
 
@@ -15,6 +15,7 @@
 			foreach ($resultats as $val) {
 				$listeNews[]= new News($val['heure'], $val['titre'], $val['site'], $val['description'], $val['fkIdFlux'], $val['idNews']);
 			}
+			
 			return $listeNews;
 		}
 
