@@ -1,0 +1,17 @@
+body
+{
+	background: url("news.png") fixed;
+}
+
+.Box
+{
+	/*margin : 300 px;*/
+	padding: 5%;
+	background-color: lightsalmon;
+	opacity: 95%;
+}
+
+h1{
+	color: black;
+}
+

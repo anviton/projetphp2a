@@ -4,7 +4,7 @@
 
 	require_once(__DIR__.'/Connection.php');
 	require_once(__DIR__.'/Gateway/NewsGateway.php');
-
+	//require_once(__DIR__.'/../Config/config.php');
 
 	class ModelNews{
 
@@ -13,9 +13,10 @@
 
 
 		function get_ToutesLesNews():array{
-			$login="anviton";
-			$mdp="VitonMyAdmin";
-			$dbs="mysql:host=localhost;dbname=dbanviton";
+			//$login="anviton";
+			//$mdp="VitonMyAdmin";
+			//$dbs="mysql:host=localhost;dbname=dbanviton";
+			global $login, $dbs, $mdp;
 			$connect = new Connection($dbs, $login, $mdp);
 			$gNews = new NewsGateway($connect);
 			$res = $gNews->listerToutesLesNews();

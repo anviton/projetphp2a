@@ -43,7 +43,7 @@
 			}
 
 		}
-		function validemdp(&$mdp,&$dvueEreur){
+		static function validemdp(&$mdp,&$dvueEreur){
 			// Partie mot de passe
 			$mdp = ltrim($mdp);
 			if (!isset($mdp)) {
@@ -55,7 +55,7 @@
 			else if (strlen($mdp) < 8) {
 				$dvueEreur[] = " Longueur mot de passe <8";
 			}
-			$mdp = "";
+			//$mdp = "";
 		}
 		function validepseudo(&$pseudo,&$dvueEreur){
 			// Partie pseudonyme
