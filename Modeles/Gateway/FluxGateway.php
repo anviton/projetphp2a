@@ -1,6 +1,6 @@
 <?php
 	
-	require('Modeles/Metier/Flux.php');
+	require(__DIR__.'/../Metier/Flux.php');
 	class FluxGateway{
 		
 		private $connect;
