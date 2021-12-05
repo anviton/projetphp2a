@@ -28,7 +28,7 @@
 		</div>
 		</main>
 			<footer>
-				<p>Viton Antoine Dut informatique groupe7</p>
+				<p>Viton Antoine Dut informatique Groupe 7</p>
 			</footer>	
 		</div>	
 	</body>
