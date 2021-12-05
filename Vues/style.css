@@ -1,17 +1,22 @@
 body
 {
-	background: url("news.png") fixed;
+	/*background: url("news.png") fixed;*/
+	background-color: rgba(255,255,255,0.8);
+	/*background-color: black;*/
 }
 
 .Box
 {
-	/*margin : 300 px;*/
-	padding: 5%;
-	background-color: lightsalmon;
-	opacity: 95%;
+	margin : 2%;
 }
 
 h1{
-	color: black;
+	color: white;
 }
 
+.BoxTable
+{
+	width: 80%;
+	text-align: center;
+	margin: 10%;
+}
