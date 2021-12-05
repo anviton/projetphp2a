@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Mer 24 Novembre 2021 à 13:34
+-- Généré le :  Dim 05 Décembre 2021 à 11:49
 -- Version du serveur :  10.3.31-MariaDB-0+deb10u1
 -- Version de PHP :  7.3.31-1~deb10u1
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `dbanviton`
 --
+CREATE DATABASE IF NOT EXISTS `dbanviton` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dbanviton`;
 
 -- --------------------------------------------------------
 
@@ -47,12 +49,19 @@ INSERT INTO `flux` (`idFlux`, `nom`, `dateDerMaj`) VALUES
 
 CREATE TABLE `news` (
   `idNews` int(11) NOT NULL,
-  `titre` varchar(200) NOT NULL,
   `heure` date NOT NULL,
+  `titre` varchar(200) NOT NULL,
   `site` varchar(30) NOT NULL,
   `description` varchar(200) NOT NULL,
   `fkIdFlux` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Contenu de la table `news`
+--
+
+INSERT INTO `news` (`idNews`, `heure`, `titre`, `site`, `description`, `fkIdFlux`) VALUES
+(1, '2021-11-24', 'tets', 'internaute', 'Nouveau test de News', 2);
 
 --
 -- Index pour les tables exportées
@@ -87,7 +96,7 @@ ALTER TABLE `flux`
 -- AUTO_INCREMENT pour la table `news`
 --
 ALTER TABLE `news`
-  MODIFY `idNews` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idNews` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
