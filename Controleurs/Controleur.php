@@ -45,12 +45,12 @@
 			} catch (PDOException $e){
 				//si erreur BD, pas le cas ici
 				$dVueEreur[] =	"Erreur inattendue!!! ";
-				require ($rep.$vues['erreur']);
+				//require ($rep.$vues['erreur']);
 
 			}
 			catch (Exception $e2){
 				$dVueEreur[] =	"Erreur inattendue!!! ";
-				require ($rep.$vues['erreur']);
+				//require ($rep.$vues['erreur']);
 			}
 
 
