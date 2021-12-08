@@ -1,7 +1,7 @@
 <?php
 
-	require_once(__DIR__.'/../Modeles/ModelNews.php');
-	require_once(__DIR__.'/../Config/config.php');
+	//require_once(__DIR__.'/../Modeles/ModelNews.php');
+	//require_once(__DIR__.'/../Config/config.php');
 	
 
 	class Controleur
@@ -10,7 +10,7 @@
 		function __construct() {
 			global $rep, $vues; 
 			// on démarre ou reprend la session
-			//session_start();
+			session_start();
 
 
 			//debut
@@ -59,10 +59,12 @@
 		}//fin constructeur
 
 		function init() {
-			global $rep, $vues, $base_url; 
-			$modeleNews = new ModelNews();
+			global $rep, $vues /*, $base_url*/; 
+			//$modeleNews = new ModelNews();
+			$modeleNews = new \Modeles\pageDAccueil();
 			$rep = $modeleNews->get_ToutesLesNews();
 			require(__DIR__.'/../Vues/pageDAccueil.php');
+			//require($rep.$vues['accueil']);
 			//var_dump($rep);
 			
 		}

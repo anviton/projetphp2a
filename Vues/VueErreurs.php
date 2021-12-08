@@ -1,5 +1,9 @@
-<html>
+<html lang="fr">
+<met charset="UTF-8"/>
+
     <head><title>Erreur</title>
+    <link rel="stylesheet" type="text/css" href="<?= $base_url . 'Vues/style.css'?>" media="screen"/>
+
     </head>
 
     <body>
