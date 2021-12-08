@@ -17,7 +17,7 @@
 		    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		      <div class="navbar-nav">
 		        <a class="nav-link active" aria-current="page" href="<?= $base_url . 'Controleurs/Controleur.php'?>">Accueil</a>
-		        <a class="nav-link" href="<?= $base_url . 'Controleurs/ControleurUser.php?action=connexion'?>">Admin</a>
+		        <a class="nav-link" href="<?= $base_url . 'index.php?action=connexion'?>">Admin</a>
 		        <a class="nav-link" href="#"></a>
 		        <a class="nav-link disabled"></a>
 		      </div>
