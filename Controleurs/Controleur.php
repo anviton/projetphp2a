@@ -20,7 +20,7 @@
 
 			try{
 			$action=$_REQUEST['action'] ?? null;
-			
+			var_dump($action);
 			//var_dump($action);
 			switch($action) {
 

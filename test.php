@@ -1,9 +1,11 @@
 <?php
 
-	require('Modeles/Gateway/FluxGateway.php');
-	require('Modeles/Gateway/NewsGateway.php');
-	require('Modeles/Metier/News.php');
-	require('Config/Connection.php');
+	//require('Modeles/Gateway/FluxGateway.php');
+	//require('Modeles/Gateway/NewsGateway.php');
+	//require('Modeles/Metier/News.php');
+	require_once('Modeles/Metier/Admin.php');
+	require_once('Modeles/Gateway/AdminGateway.php');
+	require('Modeles/Connection.php');
 	require('Config/config.php');
 
 
@@ -11,7 +13,7 @@
 	//$pass="VitonMyAdmin";
 	$connect= new Connection($dbs, $login, $mdp);
 
-	$gFlux= new FluxGateway($connect);
+	/*$gFlux= new FluxGateway($connect);
 	//$gFlux->ajoutrerUnFlux("https://www.linternaute.com/rss/");
 	$res=$gFlux->listerTousLesFlux();
 	foreach ($res as $value) {
@@ -26,5 +28,10 @@
 	foreach ($res as $value) {
 		echo $value."<br/>";
 		echo $value->idNews;
-	}
+	}*/
+
+	$gAdmin= new AdminGateway($connect);
+	$res=$gAdmin->selectionnerUnAdmin('anviton', "antoine1$$");
+	echo $res;
+
 ?>
