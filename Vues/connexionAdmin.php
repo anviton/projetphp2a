@@ -14,7 +14,7 @@
 					foreach ($dVueEreur as $value) { ?>
 					<p><?= $value ?></p>
 					<?php }} ?>
-					<form method="post" action="<?= $base_url . 'Controleurs/ControleurUser.php?action=tentativeConnexion'?>">
+					<form method="post" action="<?= 'index.php?action=tentativeConnexion'?>">
 						<p>
 							<label for="pseudo">Pseudo</label>
 							<input class="form-control" type="texte" name="pseudo" id="pseudo" size="30" maxlength="25" required /><br/></br>

@@ -18,25 +18,52 @@
 			$_SESSION = array();
 		}
 
-		function connexion($login, $motDePasse){
-			$valide = new Validation();
+		function connexion($login1, $motDePasse):bool { // a corriger
+			/*$valide = new Validation();//on peut faire la vérification ds le controleur
 			$valide->validemdp($motDePasse, $dVueEreur);
-			$valide->validepseudo($pseudo, $dVueEreur);
+			$valide->validepseudo($pseudo, $dVueEreur);*/
 
-			$res=$gAdmin->selectionnerUnAdmin($login, $motDePasse);
-			$_SESSION['role']='admin';
-			$_SESSION['login']=$login;
+			global $login, $dbs, $mdp;
+			$connect = new Connection($dbs, $login, $mdp);
+			$gAdmin = new AdminGateway($connect);
+			$res=$gAdmin->selectionnerUnAdmin($login1);
+			echo "toto";
+			if(empty($res)){
+				return false;
+			}
+			$password = $res->get("mdp");
+			//if (password_verify($motDePasse, $password)) {
+			if($password == $motDePasse){
+				$_SESSION['role']='admin';
+				$_SESSION['login']=$login1;
+				return true;
+			}
+			else{
+				return false;
+
+			}
 		}
 
-		function isAdmin(){
+		/*function isAdmin(): Admin{
 			//teste rôle dans la session, retourne instance d’objet ou booleen 
 			if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
 				//$login=Nettoyer::nettoyer_string($_SESSION[‘login’]);
 				//$role=Nettoyer::nettoyer_string($_SESSION[‘role’]);
-				return new Admin($login,$role);
+				return new Admin($login);
 			}
-				else return null;
+			return NULL;
+		}*/
+
+		function isAdmin(): bool{
+			//teste rôle dans la session, retourne instance d’objet ou booleen 
+			if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
+				//$login=Nettoyer::nettoyer_string($_SESSION[‘login’]);
+				//$role=Nettoyer::nettoyer_string($_SESSION[‘role’]);
+				return true;
 			}
+			return false;
+		}
+
 
 		function get_unAdmin($loginRech): Admin {
 			//$login="anviton";

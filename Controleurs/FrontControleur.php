@@ -3,7 +3,7 @@
 	require_once(__DIR__.'/../Modeles/ModelNews.php');
 	require_once(__DIR__.'/../Config/config.php');
 	require_once(__DIR__.'/../Modeles/ModelAdmin.php');
-	require_once(__DIR__.'/Controleur.php');
+	require_once(__DIR__.'/ControleurUser.php');
 	
 
 	class FrontControleur
@@ -15,7 +15,6 @@
 			// on démarre ou reprend la session
 			session_start();
 
-
 			//debut
 
 			//on initialise un tableau d'erreur
@@ -25,15 +24,15 @@
 				$admin = $mdlAdmin->isAdmin(); 
 				$action=$_REQUEST['action'] ?? null;
 				if(in_array($action, $listeAction_Admin)) {
-					if ($admin == null) {
+					if ($admin == false) {
 						require(__DIR__.'/../Vues/connexionAdmin.php');
 					}
 					else{
-
+						 new ControleurAdmin();
 					}
 				}
 				else{
-					$cont = new Controleur();
+					new ControleurUser();
 				}
 			}catch (PDOException $e){
 				//si erreur BD, pas le cas ici

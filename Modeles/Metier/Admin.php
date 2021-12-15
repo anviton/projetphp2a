@@ -5,11 +5,15 @@
 		private $mdp;
 
 
-		function __construct($idAdmin, $login, $mdp){
+		/*function __construct($idAdmin, $login, $mdp){
 			$this->idAdmin=$idAdmin;
 			$this->login=$login;
 			$this->mdp=$mdp;
 			
+		}*/
+
+		function __construct($login, $mdp=0){
+			$this->login = $login;
 		}
 
 		function __toString(){

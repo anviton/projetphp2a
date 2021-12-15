@@ -1,16 +1,17 @@
 <?php
 
-	require_once(__DIR__.'/../Modeles/ModelNews.php');
-	require_once(__DIR__.'/../Modeles/ModelAdmin.php');
+	require_once(__DIR__.'/../Modeles/ModelFlux.php');
 	require_once(__DIR__.'/../Config/config.php');
+	require_once(__DIR__.'/../Config/Validation.php');
 	
 
-	class ControleurUser
+	class ControleurAdmin
 	{
 		
 		function __construct() {
 			global $rep, $vues; 
 			// on démarre ou reprend la session
+			//session_start();
 
 
 			//debut
@@ -20,13 +21,9 @@
 
 			try{
 			$action=$_REQUEST['action'] ?? null;
+			
 			//var_dump($action);
 			switch($action) {
-
-			//pas d'action, on réinitialise 1er appel
-				case NULL:
-					$this->init();
-					break;
 
 				case "connexion":
 					$this->initConnexion();
@@ -35,11 +32,6 @@
 				case "tentativeConnexion":
 					$this->tentativeConnexion();
 				break;
-
-				case "validationFormulaire":
-					//$this->ValidationFormulaire($dVueEreur);
-					break;
-				
 
 				//mauvaise action
 				default:
@@ -52,18 +44,14 @@
 			} catch (PDOException $e){
 				//si erreur BD, pas le cas ici
 				$dVueEreur[] =	"Erreur inattendue!!! ";
-				//require ($rep.$vues['erreur']);
+				require ($rep.$vues['erreur']);
 
 			}
 			catch (Exception $e2){
 				$dVueEreur[] =	"Erreur inattendue!!! ";
-				//require ($rep.$vues['erreur']);
+				require ($rep.$vues['erreur']);
 			}
-
-
-			//fin
-			exit(0);
-		}//fin constructeur
+		}
 
 		function initConnexion(){
 			global $base_url;
@@ -71,38 +59,32 @@
 		}
 
 		function tentativeConnexion(){
-			$mdlAdmin = new ModelAdmin();
+			global $base_url, $mdp, $login;
 			$motDePasse = $_REQUEST['motDePasse'] ?? null;
 			$pseudo = $_REQUEST['pseudo'] ?? null;
-			//echo "totot";
-			//var_dump($err);
-			var_dump($motDePasse);
-			var_dump($pseudo);
-			$err = $mdlAdmin->connexion($pseudo, $motDePasse);
-			var_dump($err);
-			if($err == true){
-				require(__DIR__.'/../Vues/VueAdmin.php');
-			}
-			else{
-				//echo "totot2";
-				$dVueEreur[] = "Erreur mot de passe ou login";
+			$valide = new Validation();
+			$valide->validemdp($motDePasse, $dVueEreur);
+			//var_dump($pseudo);
+			$valide->validepseudo($pseudo, $dVueEreur);
+			//var_dump($pseudo);
+			//var_dump($motDePasse);
+
+			if ($pseudo != $login) {
+				$dVueEreur[] = "Erreur login";
 				require(__DIR__.'/../Vues/connexionAdmin.php');
 			}
-
-		}
-
-
-		function init() {
-			global $rep, $vues /*, $base_url*/; 
-			$modeleNews = new ModelNews();
-			//$modeleNews = new \Modeles\pageDAccueil();
-			$rep = $modeleNews->get_ToutesLesNews();
-			require(__DIR__.'/../Vues/pageDAccueil.php');
-			//require($rep.$vues['accueil']);
-			//var_dump($rep);
-			
+			elseif ($motDePasse != $mdp) {
+				$dVueEreur[] = "Erreur motDePasse";
+				require(__DIR__.'/../Vues/connexionAdmin.php');
+			}
+			else{
+				session_start();
+				$modeleFlux = new ModelFlux();
+				$rep = $modeleFlux->get_TousLesFlux();
+				require(__DIR__.'/../Vues/VueAdmin.php');
+			}
 		}
 
 	}
+
 //$cont = new ControleurUser();
-?>
