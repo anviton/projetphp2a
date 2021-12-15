@@ -2,9 +2,9 @@
 
 	//namespace modeles;
 
-	require_once(__DIR__.'/Connection.php');
+	/*require_once(__DIR__.'/Connection.php');
 	require_once(__DIR__.'/Gateway/NewsGateway.php');
-	require_once(__DIR__.'/../Config/config.php');
+	require_once(__DIR__.'/../Config/config.php');*/
 
 	class ModelNews{
 

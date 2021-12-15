@@ -1,8 +1,8 @@
 <?php
 
-	require_once(__DIR__.'/../Modeles/ModelFlux.php');
+	/*require_once(__DIR__.'/../Modeles/ModelFlux.php');
 	require_once(__DIR__.'/../Config/config.php');
-	require_once(__DIR__.'/../Config/Validation.php');
+	require_once(__DIR__.'/../Config/Validation.php');*/
 	
 
 	class ControleurAdmin

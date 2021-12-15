@@ -1,9 +1,9 @@
 <?php
 
-	require_once(__DIR__.'/../Modeles/ModelNews.php');
+	/*require_once(__DIR__.'/../Modeles/ModelNews.php');
 	require_once(__DIR__.'/../Config/config.php');
 	require_once(__DIR__.'/../Modeles/ModelAdmin.php');
-	require_once(__DIR__.'/ControleurUser.php');
+	require_once(__DIR__.'/ControleurUser.php');*/
 	
 
 	class FrontControleur

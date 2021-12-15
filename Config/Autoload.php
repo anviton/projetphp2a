@@ -31,7 +31,7 @@ class Autoload
         }
     }
 
-        private static function _autoload($className)
+        /*private static function _autoload($className)
     {
     
 echo 	$className;
@@ -48,8 +48,20 @@ $folder = "./";
 
     include $folder . $fileName;
     
+    }*/
+        private static function _autoload($class)
+        {
+            global $rep;
+            $filename = $class.'.php';
+            $dir =array('Modeles/','./','Config/','Controleurs/', 'Modeles/Gateway/', 'Modeles/Metier/');
+            foreach ($dir as $d){
+                $file=$rep.$d.$filename; 
+                //echo $file;
+                if (file_exists($file)){
+                    include $file;
+                }
+            }
+        }
     }
-}
-
 
 ?>

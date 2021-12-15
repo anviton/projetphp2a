@@ -1,6 +1,6 @@
 <?php
 	
-	require_once(__DIR__.'/../Metier/Admin.php');
+	//require_once(__DIR__.'/../Metier/Admin.php');
 	class AdminGateway{
 		
 		private $connect;

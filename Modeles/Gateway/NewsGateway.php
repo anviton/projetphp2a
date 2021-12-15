@@ -1,5 +1,5 @@
 <?php
-	require(__DIR__.'/../Metier/News.php');
+	//require(__DIR__.'/../Metier/News.php');
 	class NewsGateway{
 		private $connect;
 
