@@ -36,6 +36,11 @@
 					$this->tentativeConnexion();
 				break;
 
+
+				case "deconnexion":
+					$this->deconnexion();
+					break;
+
 				case "validationFormulaire":
 					//$this->ValidationFormulaire($dVueEreur);
 					break;
@@ -67,24 +72,32 @@
 
 		function initConnexion(){
 			global $base_url;
-			require(__DIR__.'/../Vues/connexionAdmin.php');
+			if (isset($_SESSION['role'])) {
+				$mdlFlux = new ModelFlux();
+				$rep = $mdlFlux->get_TousLesFlux();
+				require(__DIR__.'/../Vues/VueAdmin.php');
+			}
+			else{
+				require(__DIR__.'/../Vues/connexionAdmin.php');
+			}
 		}
 
 		function tentativeConnexion(){
 			$mdlAdmin = new ModelAdmin();
 			$motDePasse = $_REQUEST['motDePasse'] ?? null;
 			$pseudo = $_REQUEST['pseudo'] ?? null;
-			//echo "totot";
-			//var_dump($err);
-			var_dump($motDePasse);
-			var_dump($pseudo);
+
+			$valide = new Validation();
+			$valide->validemdp($motDePasse, $dVueEreur);
+			$valide->validepseudo($pseudo, $dVueEreur);
+
 			$err = $mdlAdmin->connexion($pseudo, $motDePasse);
-			var_dump($err);
 			if($err == true){
+				$mdlFlux = new ModelFlux();
+				$rep = $mdlFlux->get_TousLesFlux();
 				require(__DIR__.'/../Vues/VueAdmin.php');
 			}
 			else{
-				//echo "totot2";
 				$dVueEreur[] = "Erreur mot de passe ou login";
 				require(__DIR__.'/../Vues/connexionAdmin.php');
 			}
@@ -101,6 +114,14 @@
 			//require($rep.$vues['accueil']);
 			//var_dump($rep);
 			
+		}
+
+		function deconnexion(){
+			if (isset($_SESSION['role'])) {
+				$mdlAdmin = new ModelAdmin();
+				$mdlAdmin->deconnexion();
+			}
+			$this->init();
 		}
 
 	}

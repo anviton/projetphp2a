@@ -20,5 +20,19 @@
 			return $res;
 		}
 
+		function ajouterFlux($lien){
+			global $login, $dbs, $mdp;
+			$connect = new Connection($dbs, $login, $mdp);
+			$gFlux = new FluxGateway($connect);
+			$res = $gFlux->ajoutrerUnFlux($lien);
+		}
+
+		function supprimerFlux($lien){
+			global $login, $dbs, $mdp;
+			$connect = new Connection($dbs, $login, $mdp);
+			$gFlux = new FluxGateway($connect);
+			$res = $gFlux->supprimerUnFlux($lien);
+		}
+
 	//fin modèles
 	}

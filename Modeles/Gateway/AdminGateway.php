@@ -21,16 +21,20 @@
 			return $listeAdmin;
 		}
 
-		public function selectionnerUnAdmin($login): Admin {
-			$admin;
-			$requete = 'SELECT * FROM Admin WHERE login = :loginRech AND mdp = :mdpRech';
-			if($this->connect->executeQuery($requete, array(':loginRech' => array($login,PDO::PARAM_STR )))) {
-				$resultats = $this->connect->getResults();
+		public function selectionnerUnAdmin($login): ?Admin {
+			$admin = null;
+			$requete = 'SELECT * FROM Admin WHERE login = :loginRech';
+			$this->connect->executeQuery($requete, array(':loginRech' => array($login,PDO::PARAM_STR )));
+			$resultats = $this->connect->getResults();
+			if($resultats != null){
 				foreach ($resultats as $val) {
 					$admin = new Admin($val['login'], $val['mdp']);
 				}
+				return $admin;
 			}
-			return $admin;
+			else{
+				return null;
+			}
 		}
 
 		/*public function ajouterAdmin($loginNew, $mdpNew): bool{

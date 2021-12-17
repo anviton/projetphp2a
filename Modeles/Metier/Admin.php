@@ -14,6 +14,7 @@
 
 		function __construct($login, $mdp=0){
 			$this->login = $login;
+			$this->mdp = $mdp;
 		}
 
 		function __toString(){

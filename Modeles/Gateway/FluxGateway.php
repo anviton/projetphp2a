@@ -27,9 +27,9 @@
 			$requete='INSERT INTO flux(nom, dateDerMaj) VALUES(:nom, :dateDerMaj)';
 			$this->connect->executeQuery($requete, array(':nom' => array($nom,PDO::PARAM_STR ), ':dateDerMaj' => array($date,PDO::PARAM_STR )));
 		}
-		public function supprimerUnFlux($id){
-			$requete='DELETE FROM flux WHERE idFlux=:id';
-			$this->connect->executeQuery($requete, array(':id' => array($id,PDO::PARAM_STR )));
+		public function supprimerUnFlux($nom){
+			$requete='DELETE FROM flux WHERE nom=:nomFlux';
+			$this->connect->executeQuery($requete, array(':nomFlux' => array($nom,PDO::PARAM_STR )));
 		}
 	}
 

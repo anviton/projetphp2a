@@ -19,28 +19,26 @@
 		}
 
 		function connexion($login1, $motDePasse):bool { // a corriger
-			/*$valide = new Validation();//on peut faire la vérification ds le controleur
-			$valide->validemdp($motDePasse, $dVueEreur);
-			$valide->validepseudo($pseudo, $dVueEreur);*/
+			
 
 			global $login, $dbs, $mdp;
 			$connect = new Connection($dbs, $login, $mdp);
 			$gAdmin = new AdminGateway($connect);
 			$res=$gAdmin->selectionnerUnAdmin($login1);
-			echo "toto";
-			if(empty($res)){
+			if($res == null){
 				return false;
 			}
-			$password = $res->get("mdp");
-			//if (password_verify($motDePasse, $password)) {
-			if($password == $motDePasse){
+			$password = $res->mdp;
+			//var_dump($motDePasse);
+			//var_dump($password);
+			if (password_verify($motDePasse, $password)) {
+			//if ($motDePasse == $password) {
 				$_SESSION['role']='admin';
 				$_SESSION['login']=$login1;
 				return true;
 			}
 			else{
 				return false;
-
 			}
 		}
 

@@ -25,12 +25,12 @@
 			//var_dump($action);
 			switch($action) {
 
-				case "connexion":
-					$this->initConnexion();
+				case "supprimer":
+					$this->supprimer();
 					break;
 
-				case "tentativeConnexion":
-					$this->tentativeConnexion();
+				case "ajouter":
+					$this->ajouter();
 				break;
 
 				//mauvaise action
@@ -53,36 +53,21 @@
 			}
 		}
 
-		function initConnexion(){
-			global $base_url;
-			require(__DIR__.'/../Vues/connexionAdmin.php');
+		function ajouter(){
+			$flux = $_REQUEST['flux'] ?? null;
+			$mdlFlux = new ModelFlux();
+			$mdlFlux->ajouterFlux($flux);
+			$rep = $mdlFlux->get_TousLesFlux();
+			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
 
-		function tentativeConnexion(){
-			global $base_url, $mdp, $login;
-			$motDePasse = $_REQUEST['motDePasse'] ?? null;
-			$pseudo = $_REQUEST['pseudo'] ?? null;
-			$valide = new Validation();
-			$valide->validemdp($motDePasse, $dVueEreur);
-			//var_dump($pseudo);
-			$valide->validepseudo($pseudo, $dVueEreur);
-			//var_dump($pseudo);
-			//var_dump($motDePasse);
-
-			if ($pseudo != $login) {
-				$dVueEreur[] = "Erreur login";
-				require(__DIR__.'/../Vues/connexionAdmin.php');
-			}
-			elseif ($motDePasse != $mdp) {
-				$dVueEreur[] = "Erreur motDePasse";
-				require(__DIR__.'/../Vues/connexionAdmin.php');
-			}
-			else{
-				session_start();
-				$modeleFlux = new ModelFlux();
-				$rep = $modeleFlux->get_TousLesFlux();
-				require(__DIR__.'/../Vues/VueAdmin.php');
-			}
+		function supprimer(){
+			$flux = $_REQUEST['flux'] ?? null;
+			//var_dump($flux);
+			$mdlFlux = new ModelFlux();
+			$mdlFlux->supprimerFlux($flux);
+			$rep = $mdlFlux->get_TousLesFlux();
+			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
 
 	}

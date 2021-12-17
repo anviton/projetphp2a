@@ -24,7 +24,7 @@
 								foreach ($rep as $value) { ?>
 						<tr>
 							<th scope="row"><?php echo $value->heure; ?></th>
-							<td><?php echo $value->site; ?></td>
+							<td><a href="<?php echo $value->site; ?>" /><?php echo $value->site; ?></td>
 							<td><?php echo $value->titre; ?></td>
 							<td><?php echo $value->description; ?></td>
 						</tr>

@@ -18,7 +18,7 @@
 		      <div class="navbar-nav">
 		        <a class="nav-link active" aria-current="page" href="<?= 'index.php'?>">Accueil</a>
 		        <a class="nav-link" href="<?= 'index.php?action=connexion'?>">Admin</a>
-		        <a class="nav-link" href="#"></a>
+		        <a class="nav-link" href="<?= 'index.php?action=deconnexion'?>">Deconnexion</a>
 		        <a class="nav-link disabled"></a>
 		      </div>
 		    </div>
