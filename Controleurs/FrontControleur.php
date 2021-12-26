@@ -11,7 +11,7 @@
 		
 		function __construct() {
 			global $rep, $vues;
-			$listeAction_Admin= array('deconnecter','supprimer', 'ajouter');
+			$listeAction_Admin= array('deconnecter','supprimer', 'ajouter', 'modifNbNews');
 			// on démarre ou reprend la session
 			session_start();
 

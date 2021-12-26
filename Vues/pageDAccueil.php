@@ -32,6 +32,11 @@
 							}} ?>
 					</tbody>
 				</table>
+				<?php
+					for($i = 1; $i <= $nbPage; $i++){
+						echo "<a href='index.php?numPageNews=$i' >$i</a> ";
+					}
+				?>
 			</div>
 		</section>
 	</body>

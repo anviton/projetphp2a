@@ -31,7 +31,11 @@
 
 				case "ajouter":
 					$this->ajouter();
-				break;
+					break;
+
+				case 'modifNbNews':
+					$this->modifierLeNombreDeNews();
+					break;
 
 				//mauvaise action
 				default:
@@ -64,9 +68,19 @@
 		function supprimer(){
 			$flux = $_REQUEST['flux'] ?? null;
 			//var_dump($flux);
+			if ($flux == null) {
+				require($rep.$vues['erreur']);
+			}
 			$mdlFlux = new ModelFlux();
 			$mdlFlux->supprimerFlux($flux);
 			$rep = $mdlFlux->get_TousLesFlux();
+			require(__DIR__.'/../Vues/VueAdmin.php');
+		}
+
+		function modifierLeNombreDeNews(){
+			$nbNews = $_REQUEST['nbNews'] ?? null;
+			$mdlConfig = new ModelConfiguration();
+			$mdlConfig->modifierLeNombreDeNews($nbNews);
 			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
 

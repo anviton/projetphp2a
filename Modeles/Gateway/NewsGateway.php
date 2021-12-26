@@ -41,13 +41,21 @@
 			$listeNews;
 			//echo "$numPageNews";
 			$nbLigne = $this->compterLesNews();
+			var_dump($nbLigne);
 			$mdlConfig = new ModelConfiguration();
 			$nbNewsParPage = $mdlConfig->nombreDeNewsParPage();
-			var_dump($nbNewsParPage);
+			//var_dump($nbNewsParPage);
 			//$nbNewsParPage = 10;
 			$nbPage = ceil($nbLigne / $nbNewsParPage);
 			$requete='SELECT * FROM news LIMIT :nbNews OFFSET  :of';
-			$this->connect->executeQuery($requete, array(':nbNews' => array($nbNewsParPage,PDO::PARAM_INT), ':of' => array($nbLigne-($nbNewsParPage) * $numPageNews ,PDO::PARAM_INT)));
+			if ($nbPage == $numPageNews) {
+				echo "Coucou";
+				$nbNews = $nbLigne-$nbNewsParPage*($numPageNews-1);
+				$this->connect->executeQuery($requete, array(':nbNews' => array($nbNews,PDO::PARAM_INT), ':of' => array(0 ,PDO::PARAM_INT)));
+			}
+			else{
+				$this->connect->executeQuery($requete, array(':nbNews' => array($nbNewsParPage,PDO::PARAM_INT), ':of' => array($nbLigne-($nbNewsParPage) * $numPageNews ,PDO::PARAM_INT)));
+			}
 			$resultats=$this->connect->getResults();
 			foreach ($resultats as $val) {
 				$listeNews[]= new News($val['heure'], $val['titre'], $val['site'], $val['description'], $val['fkIdFlux'], $val['idNews']);

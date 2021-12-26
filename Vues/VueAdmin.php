@@ -37,7 +37,7 @@
 				<form method="post" action="<?= 'index.php?action=ajouter'?>">
 					<p>
 						<label for="pseudo">Nom du flux à ajouter :</label>
-						<input class="form-control" type="texte" name="flux" id="flux" size="30" maxlength="25" required /><br/></br>
+						<input class="form-control" type="texte" name="flux" id="flux" size="100" maxlength="100" required /><br/></br>
 						<input type="submit" value="Ajouter" name="valid" />
 					</p>
 				</form>

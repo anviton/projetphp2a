@@ -108,8 +108,23 @@
 		function init() {
 			global $rep, $vues /*, $base_url*/; 
 			$modeleNews = new ModelNews();
+			$numPageNews = $_REQUEST['numPageNews'] ?? null;
+			if (!isset($numPageNews)) {
+				$numPageNews = 1;
+			}
+			$mdlConfig = new ModelConfiguration();
+			$nbNewsParPage = $mdlConfig->nombreDeNewsParPage();
+
 			//$modeleNews = new \Modeles\pageDAccueil();
-			$rep = $modeleNews->get_ToutesLesNews();
+			//$rep = $modeleNews->get_ToutesLesNews();
+
+			$rep = $modeleNews->getNewsPage($numPageNews);
+
+			$nbNews = $modeleNews->nombreDeNews();
+			$nbPagePasArrondi = $nbNews / $nbNewsParPage;
+			var_dump($nbPagePasArrondi);
+;			$nbPage = ceil($nbPagePasArrondi);
+			var_dump($nbPage);
 			require(__DIR__.'/../Vues/pageDAccueil.php');
 			//require($rep.$vues['accueil']);
 			//var_dump($rep);
