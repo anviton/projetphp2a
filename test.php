@@ -41,10 +41,24 @@
 
 	$pars = new Parseur();
 	$gNews= new NewsGateway($connect);
-	$listeNews = $pars->parser("https://www.lequipe.fr/rss/actu_rss_Football.xml", "2");
-	foreach ($listeNews as $value) {
-		$gNews->ajouterUneNews($value->heure, $value->titre, $value->site, $value->description, $value->fkIdFlux);
+	$gflux = new FluxGateway($connect);
+	$lesFlux = $gflux->listerTousLesFlux();
+	//var_dump($lesFlux);
+	foreach($lesFlux as $flux){
+		$tuple = $pars->parser($flux->titre, $flux->idFlux);
+		//$date = date_create($tuple[0]);
+		var_dump($tuple[0]);
+		$newDate = DateTime::createFromFormat('D, d M Y H:i:s P', $tuple[0]);
+		$newDate = $newDate->format('Y-m-d H:i:s');
+		//var_dump($newDate);
+		echo "Coucou";
+		//var_dump($newDate);
+		$gflux->mettreAjourUnflux($flux->titre, $newDate);
+		$listeNews = array_reverse($tuple[1]);
+		foreach ($listeNews as $value) {
+			$nDate = DateTime::createFromFormat('D, d M Y H:i:s P', $value->heure);
+			$nDate = $nDate->format('Y-m-d H:i:s');
+			$gNews->ajouterUneNews($nDate, $value->titre, $value->site, $value->description, $value->fkIdFlux);
+		}
 	}
-
-
 ?>

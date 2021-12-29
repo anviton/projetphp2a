@@ -3,7 +3,7 @@
 		<?php include("Header.php")?>
 		<met charset="UTF-8"/>
 		<title>Accueil</title>
-		<link rel="stylesheet" type="text/css" href="<?= $base_url . 'Vues/style.css'?>" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="<?='Vues/style.css'?>" media="screen"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	</head>
 		<section class="p-3 mb-2 bg-dark text-white">
@@ -23,8 +23,10 @@
 							if(isset($rep)){
 								foreach ($rep as $value) { ?>
 						<tr>
-							<th scope="row"><?php echo $value->heure; ?></th>
-							<td><a href="<?php echo $value->site; ?>" /><?php echo $value->site; ?></td>
+							<th scope="row"><?php 
+							$date = DateTime::createFromFormat('Y-m-d H:i:s', $value->heure)->format('d-m-Y H:i:s');
+							echo $date; ?></th>
+							<td><a class="lienTab" href="<?php echo $value->site; ?>" /><?php echo $value->site; ?></td>
 							<td><?php echo $value->titre; ?></td>
 							<td><?php echo $value->description; ?></td>
 						</tr>
@@ -34,7 +36,7 @@
 				</table>
 				<?php
 					for($i = 1; $i <= $nbPage; $i++){
-						echo "<a href='index.php?numPageNews=$i' >$i</a> ";
+						echo "<a class='lien' href='index.php?numPageNews=$i' >$i</a> ";
 					}
 				?>
 			</div>

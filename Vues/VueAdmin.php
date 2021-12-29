@@ -26,7 +26,7 @@
 							<th scope="row"><?php echo $value->titre; ?></th>
 							<td><?php echo $value->dateDerMaj; ?></td>
 							<td>
-								<a href="<?= 'index.php?action=supprimer&flux=' .$value->titre?>"> supp </a>
+								<a class="lien" href="<?= 'index.php?action=supprimer&flux=' .$value->idFlux?>">X</a>
 							</td>
 							
 						</tr>
@@ -48,6 +48,7 @@
 						<input type="submit" value="Valider" name="valid" />
 					</p>
 				</form>
+				<a class="lienMaj" href="<?= 'index.php?action=mettreAJour'?>">Mettre à jour</a>
 			</div>
 		</section>
 	</body>

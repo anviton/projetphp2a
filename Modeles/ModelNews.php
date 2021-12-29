@@ -39,5 +39,12 @@
 			return $res;
 		}
 
+		public function supprimerNews($id){
+			global $login, $dbs, $mdp;
+			$connect = new Connection($dbs, $login, $mdp);
+			$gNews = new NewsGateway($connect);
+			$gNews->supprimerLesNewsDUnFlux($id);
+		}
+
 	//fin modèles
 	}

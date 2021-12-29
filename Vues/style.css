@@ -16,10 +16,67 @@ h1{
 
 .BoxTable
 {
-	width: 80%;
+	width: 90%;
 	text-align: center;
-	margin: 10%;
+	margin: 5%;
+}
+
+.lienTab{
+	color:  #49a9d9;
+}
+
+.lienTab:link{
+	color: #49a9d9;
+}
+
+.lien:link{
+	color: white;
+}
+
+.lien:visited{
+	color: white;
 }
 
 
+.lien{
+	font-family: sans-serif;
+	font font-weight: 200;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: red;
+	border border-radius: 4px;
+	padding: 10px 15px;
+	background-color: #3498DB;
+	transition: background case-in 200ns;
+}
+
+.lienMaj:hover{
+	background-color: #2980b9;
+}
+
+.lienMaj:link{
+	color: white;
+}
+
+.lienMaj:visited{
+	color: white;
+}
+
+
+.lienMaj{
+	font-family: sans-serif;
+	font font-weight: 200;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: red;
+	border border-radius: 4px;
+	padding: 10px 15px;
+	background-color: #3498DB;
+	transition: background case-in 200ns;
+	margin: 400px;
+}
+
+.lienMaj:hover{
+	background-color: #2980b9;
+}
 

@@ -21,9 +21,9 @@
 		}
 
 		public function ajouterUneNews($heure, $titre, $site, $description, $fkIdFLux){
-			$heureModif = '2021-12-16'; //(new DateTime($heure))->format(DATE_ATOM);;
+			//$heureModif = '2021-12-16'; //(new DateTime($heure))->format(DATE_ATOM);;
 			$requete='INSERT INTO news(heure, titre, site, description, fkIdFLux) VALUES(:heure, :titre, :site, :description, :fkIdFLux)';
-			$this->connect->executeQuery($requete, array(':heure' => array($heureModif,PDO::PARAM_STR), ':titre' => array($titre,PDO::PARAM_STR), ':site' => array($site, PDO::PARAM_STR), ':description' => array($description,PDO::PARAM_STR), ':fkIdFLux' => array($fkIdFLux,PDO::PARAM_STR)));
+			$this->connect->executeQuery($requete, array(':heure' => array($heure,PDO::PARAM_STR), ':titre' => array($titre,PDO::PARAM_STR), ':site' => array($site, PDO::PARAM_STR), ':description' => array($description,PDO::PARAM_STR), ':fkIdFLux' => array($fkIdFLux,PDO::PARAM_STR)));
 		}
 
 		public function compterLesNews(): int {
@@ -49,7 +49,7 @@
 			$nbPage = ceil($nbLigne / $nbNewsParPage);
 			$requete='SELECT * FROM news LIMIT :nbNews OFFSET  :of';
 			if ($nbPage == $numPageNews) {
-				echo "Coucou";
+				//echo "Coucou";
 				$nbNews = $nbLigne-$nbNewsParPage*($numPageNews-1);
 				$this->connect->executeQuery($requete, array(':nbNews' => array($nbNews,PDO::PARAM_INT), ':of' => array(0 ,PDO::PARAM_INT)));
 			}
@@ -63,6 +63,11 @@
 			
 			return $listeNews;
 		
+		}
+
+		public function supprimerLesNewsDUnFlux($idFlux){
+			$requete = 'DELETE FROM news WHERE fkIdFlux = :id';
+			$this->connect->executeQuery($requete, array(':id' => array($idFlux,PDO::PARAM_INT)));
 		}
 
 
