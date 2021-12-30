@@ -45,5 +45,20 @@
 			$gFlux = new FluxGateway($connect);
 			$res = $gFlux->supprimerUnFlux($lien);
 		}
+		/**
+		 * Méthode permmettant de vérifier si un flux existe en base
+		 * @param lien : lien du flux à vérifier
+		 * @return true si le flux existe false si le flux existe pas
+		 */
+		function fluxExiste($lien):bool{
+			global $login, $dbs, $mdp;
+			$connect = new Connection($dbs, $login, $mdp);
+			$gFlux = new FluxGateway($connect);
+			$res = $gFlux->chercherUnFlux($lien);
+			if (count($res) > 0 ) {
+				return true;
+			}
+			return false;
+		}
 
 	}

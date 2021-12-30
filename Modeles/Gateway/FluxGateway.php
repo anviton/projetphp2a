@@ -37,8 +37,9 @@
 		 * @param string $nom nom du flux à ajouter
 		 */
 		public function ajoutrerUnFlux($nom){
-			$date=strftime("%y-%m-%d");
+			//$date=strftime("%y-%m-%d");
 			//$date="2021-11-18";
+			$date = "2000-01-01";
 			$requete='INSERT INTO flux(nom, dateDerMaj) VALUES(:nom, :dateDerMaj)';
 			$this->connect->executeQuery($requete, array(':nom' => array($nom,PDO::PARAM_STR ), ':dateDerMaj' => array($date,PDO::PARAM_STR )));
 		}
@@ -58,10 +59,26 @@
 		public function mettreAjourUnflux($nom, $date){
 			$requete = 'UPDATE flux SET dateDerMaj = :dateMaj WHERE nom = :nomFlux';
 			//$date="2021-11-18";
-			var_dump($date);
-			var_dump($nom);
+			//var_dump($date);
+			//var_dump($nom);
 
 			$this->connect->executeQuery($requete, array(':nomFlux' => array($nom, PDO::PARAM_STR), ':dateMaj' => array($date, PDO::PARAM_STR)));
+		}
+		/**
+		 * Méthode cherchant un flux
+		 * @param lien  : lien du flux recherché
+		 * @retrun liste de flux trouvé
+		 */
+		public function chercherUnFlux($lien):array{
+			$listeFlux=[];
+			$requete='SELECT * FROM flux WHERE nom = :nomFlux';
+			if($this->connect->executeQuery($requete, array(':nomFlux' => array($lien, PDO::PARAM_STR)))){
+				$resultats=$this->connect->getResults();
+				foreach ($resultats as $val) {
+					$listeFlux[]= new Flux($val['idFlux'], $val['nom'], $val['dateDerMaj']);
+				}
+			}
+			return $listeFlux;
 		}
 	}
 

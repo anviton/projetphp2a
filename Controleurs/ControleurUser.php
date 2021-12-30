@@ -121,33 +121,25 @@
 		/**
 		 * Méthode d'initialisation
 		 * Définition de la page de la news affiché
-		 * Modification du nombre de news par page
 		 * Redirection vers la page d'accueil
 		 */
 		function init() {
 			global $rep, $vues /*, $base_url*/; 
 			$modeleNews = new ModelNews();
-			$numPageNews = $_REQUEST['numPageNews'] ?? null;
-			if (!isset($numPageNews)) {
-				$numPageNews = 1;
-			}
+			$nbNews = $modeleNews->nombreDeNews();
 			$mdlConfig = new ModelConfiguration();
 			$nbNewsParPage = $mdlConfig->nombreDeNewsParPage();
-
-			//$modeleNews = new \Modeles\pageDAccueil();
-			//$rep = $modeleNews->get_ToutesLesNews();
-
-			$rep = $modeleNews->getNewsPage($numPageNews);
-
-			$nbNews = $modeleNews->nombreDeNews();
 			$nbPagePasArrondi = $nbNews / $nbNewsParPage;
 			var_dump($nbPagePasArrondi);
-;			$nbPage = ceil($nbPagePasArrondi);
+			$nbPage = ceil($nbPagePasArrondi);
 			var_dump($nbPage);
-			require(__DIR__.'/../Vues/pageDAccueil.php');
-			//require($rep.$vues['accueil']);
-			//var_dump($rep);
-			
+			$numPageNews = $_REQUEST['numPageNews'] ?? null;
+			if (!isset($numPageNews) || $numPageNews > $nbPage || $numPageNews < 1) {
+				$numPageNews = 1;
+			}
+			$rep = $modeleNews->getNewsPage($numPageNews);
+			$rep = array_reverse($rep);
+			require(__DIR__.'/../Vues/pageDAccueil.php');			
 		}
 		/**
 		 * Méthode de déconnexion de l'administrateur

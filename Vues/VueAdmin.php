@@ -35,6 +35,10 @@
 					</tbody>
 				</table>
 				<form method="post" action="<?= 'index.php?action=ajouter'?>">
+					<?php if (isset($dVueEreur)) {
+					foreach ($dVueEreur as $value) { ?>
+					<p><?= $value ?></p>
+					<?php }} ?>
 					<p>
 						<label for="pseudo">Nom du flux à ajouter :</label>
 						<input class="form-control" type="texte" name="flux" id="flux" size="100" maxlength="100" required /><br/></br>
@@ -44,7 +48,7 @@
 				<form method="post" action="<?= 'index.php?action=modifNbNews'?>">
 					<p>
 						<label for="pseudo">Nombre de News par page :</label>
-						<input class="form-control" type="texte" name="nbNews" id="nbNews" size="150" maxlength="150" required /><br/></br>
+						<input class="form-control" type="number" name="nbNews" id="nbNews" size="150" maxlength="150" required /><br/></br>
 						<input type="submit" value="Valider" name="valid" />
 					</p>
 				</form>

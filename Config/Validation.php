@@ -116,8 +116,7 @@
 		 * @param string $format
 		 * @return bool true si la date est valide sinon false
 		 */
-		function validateDate($date, $format = 'Y-m-d H:i:s')
-		{
+		function validateDate($date, $format = 'Y-m-d H:i:s'){
 			$d = DateTime::createFromFormat($format, $date);
 			return $d && $d->format($format) == $date;
 		}
@@ -126,14 +125,16 @@
 		 * @param string $flux flux à tester et a valider
 		 * @param array $dvueEreur message d'erreur si il y a un problème
 		 */
-		function valideAjoutFlux(&$flux,&$dvueEreur){
+		function valideAjoutFlux(&$flux,&$dvueEreur):bool{
 			if (!filter_var($flux, FILTER_VALIDATE_URL)){
 				$dvueEreur[] = " Flux invalide ";
+				return false;
 			}
 			else if (!isset($flux)){
-				$dvueEreur[] = " Rentrer un nom de flux à ajouter"
+				$dvueEreur[] = " Rentrer un nom de flux à ajouter";
+				return false;
 			}
-
+			return true;
 		}
 	}
 ?> 

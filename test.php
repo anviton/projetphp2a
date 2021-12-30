@@ -51,14 +51,16 @@
 		$newDate = DateTime::createFromFormat('D, d M Y H:i:s P', $tuple[0]);
 		$newDate = $newDate->format('Y-m-d H:i:s');
 		//var_dump($newDate);
-		echo "Coucou";
 		//var_dump($newDate);
-		$gflux->mettreAjourUnflux($flux->titre, $newDate);
-		$listeNews = array_reverse($tuple[1]);
-		foreach ($listeNews as $value) {
-			$nDate = DateTime::createFromFormat('D, d M Y H:i:s P', $value->heure);
-			$nDate = $nDate->format('Y-m-d H:i:s');
-			$gNews->ajouterUneNews($nDate, $value->titre, $value->site, $value->description, $value->fkIdFlux);
-		}
+			//echo "Coucou";
+			$gflux->mettreAjourUnflux($flux->titre, $newDate);
+			$listeNews = array_reverse($tuple[1]);
+			foreach ($listeNews as $value) {
+				$nDate = DateTime::createFromFormat('D, d M Y H:i:s P', $value->heure);
+				$nDate = $nDate->format('Y-m-d H:i:s');
+				if ($flux->dateDerMaj < $nDate) {
+					$gNews->ajouterUneNews($nDate, $value->titre, $value->site, $value->description, $value->fkIdFlux);
+				}
+			}
 	}
 ?>

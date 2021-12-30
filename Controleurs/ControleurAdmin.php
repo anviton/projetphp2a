@@ -76,8 +76,17 @@
 		 */
 		function ajouter(){
 			$flux = $_REQUEST['flux'] ?? null;
+			$validation = new Validation();
+			$bool = $validation->valideAjoutFlux($flux, $dVueEreur);
 			$mdlFlux = new ModelFlux();
-			$mdlFlux->ajouterFlux($flux);
+			if($bool){
+				if (!$mdlFlux->fluxExiste($flux)) {
+					$mdlFlux->ajouterFlux($flux);
+				}
+				else{
+					$dVueEreur[] = "Flux déjà présent";
+				}
+			}
 			$rep = $mdlFlux->get_TousLesFlux();
 			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
@@ -114,7 +123,7 @@
 			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
 		/**
-		 * Méthode de mise à jour des flux
+		 * Méthode de mise à jour des news (les nouvelles news présentes dans les flux de la bases sont ajoutés dans le base)
 		 */
 		function mettreAJour(){
 			require(__DIR__.'/../test.php');
