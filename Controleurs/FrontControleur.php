@@ -5,10 +5,17 @@
 	require_once(__DIR__.'/../Modeles/ModelAdmin.php');
 	require_once(__DIR__.'/ControleurUser.php');*/
 	
-
+	/**
+	 * Class Front controleur
+	 * @package Controleurs 
+	 * @author Antoine Viton, Adrien Coudour
+	 */
 	class FrontControleur
 	{
-		
+		/**
+		 * Constructeur du Front Controleur
+		 * Recupération des exceptions et redirection selon l'action lancé par l'utilisateur
+		 */
 		function __construct() {
 			global $rep, $vues;
 			$listeAction_Admin= array('deconnecter','supprimer', 'ajouter', 'modifNbNews', 'mettreAJour');

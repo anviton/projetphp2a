@@ -4,10 +4,17 @@
 	require_once(__DIR__.'/../Config/config.php');
 	require_once(__DIR__.'/../Config/Validation.php');*/
 	
-
+	/**
+	 * Class controleur de l'admin
+	 * @package Controleurs 
+	 * @author Antoine Viton, Adrien Coudour
+	 */
 	class ControleurAdmin
 	{
-		
+		/**
+		 * Constructeur du controleur Admin
+		 * Recupération des exception et redirection selon l'action lancé par l'utilisateur
+		 */
 		function __construct() {
 			global $rep, $vues; 
 			// on démarre ou reprend la session
@@ -63,7 +70,10 @@
 				//require ($rep.$vues['erreur']);
 			}
 		}
-
+		/**
+		 * Méthode permettant d'ajouter un flux
+		 * Récupèration du flux par un formulaire
+		 */
 		function ajouter(){
 			$flux = $_REQUEST['flux'] ?? null;
 			$mdlFlux = new ModelFlux();
@@ -71,7 +81,12 @@
 			$rep = $mdlFlux->get_TousLesFlux();
 			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
-
+		/**
+		 * Méthode permettant de supprimer un flux
+		 * Récupération du flux par un formulaire 
+		 * Suppresion des news et du flux
+		 * Renvoie sur la vue Administrateur
+		 */
 		function supprimer(){
 			$flux = $_REQUEST['flux'] ?? null;
 			var_dump($flux);
@@ -85,7 +100,11 @@
 			$rep = $mdlFlux->get_TousLesFlux();
 			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
-
+		/**
+		 * Méthode qui modifie le nombre de news par page
+		 * Change la configuration du model en fonction du nombre de news
+		 * Renvoie sur la vue Administrateur
+		 */
 		function modifierLeNombreDeNews(){
 			$nbNews = $_REQUEST['nbNews'] ?? null;
 			$mdlConfig = new ModelConfiguration();
@@ -94,7 +113,9 @@
 			$rep = $mdlFlux->get_TousLesFlux();
 			require(__DIR__.'/../Vues/VueAdmin.php');
 		}
-
+		/**
+		 * Méthode de mise à jour des flux
+		 */
 		function mettreAJour(){
 			require(__DIR__.'/../test.php');
 			$mdlFlux = new ModelFlux();

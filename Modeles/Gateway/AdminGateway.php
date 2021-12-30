@@ -1,14 +1,24 @@
 <?php
 	
-	//require_once(__DIR__.'/../Metier/Admin.php');
+	/**
+	 * Classe de la gateway de l'admin
+	 * @package Modele/Gateway
+	 * @author Antoine Viton, Adrien Coudour
+	 */
 	class AdminGateway{
 		
 		private $connect;
-
+		/**
+		 * Constructeur du gateway de l'admin
+		 *  @param string $con permet la connexion
+		 */
 		public function __construct($con){
 			$this->connect=$con;
 		}
-
+		/**
+		 * Méthode permettant de récupérer tous les administrateurs
+		 * @return array Liste des administrateur
+		 */
 		public function listerTousLesAdmin(): array {
 			$listeAdmin=[];
 			$requete='SELECT * FROM Admin WHERE ';
@@ -20,7 +30,11 @@
 			}
 			return $listeAdmin;
 		}
-
+		/**
+		 * Méthode permettant de selectionner un administrateur
+		 * @param string $login de l'administrateur concerné
+		 * @return Admin renvoie l'administrateur avec son login et son mot de passe, si il n'existe pas renvoie null
+		 */
 		public function selectionnerUnAdmin($login): ?Admin {
 			$admin = null;
 			$requete = 'SELECT * FROM Admin WHERE login = :loginRech';

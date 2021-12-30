@@ -1,23 +1,27 @@
 <?php
-
-	//namespace modeles;
-
-	/*require_once(__DIR__.'/Connection.php');
-	require_once(__DIR__.'/Gateway/AdminGateway.php');
-	require_once(__DIR__.'/Metier/Admin.php');
-	//require_once(__DIR__.'/../Config/config.php');*/
-
+	/**
+	 * Classe du model de la configuration
+	 * @package  Modeles
+	 * @author Antoine Viton, Adrien Coudour
+	 */
 	class ModelAdmin{
 
-		//constructeur
-		//vide
-
+		/**
+		 * Méthode de deconexion
+		 */
 		function deconnexion(){
 			session_unset();
 			session_destroy();
 			$_SESSION = array();
 		}
-
+		/**
+		 * Méthode de connexion
+		 * Vérification du login
+		 * Vérification du mot de passe 
+		 * @param string $login1 identifiant pour la connexion rentré par l'utilisateur
+		 * @param string $motdepasse utilisateur rentré par l'utilisateur
+		 * @return bool true si la connexion c'est bien déroulé sinon false
+		 */
 		function connexion($login1, $motDePasse):bool { // a corriger
 			
 
@@ -51,7 +55,10 @@
 			}
 			return NULL;
 		}*/
-
+		/**
+		 * Vérification si un l'administrateur est connecté
+		 * @return bool true si l'administrateur est connecté sinon false
+		 */
 		function isAdmin(): bool{
 			//teste rôle dans la session, retourne instance d’objet ou booleen 
 			if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
@@ -62,7 +69,10 @@
 			return false;
 		}
 
-
+		/**
+		 * Méthode de récupération de l'admin
+		 * @return Admin renvoie l'administrateur connecté
+		 */
 		function get_unAdmin($loginRech): Admin {
 			//$login="anviton";
 			//$mdp="VitonMyAdmin";

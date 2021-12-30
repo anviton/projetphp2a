@@ -1,12 +1,21 @@
 <?php
 	
-	/**
-	 * 
-	 */
 
+	
 	require_once(__DIR__.'/../Modeles/Metier/News.php');
+	/**
+	 * Parseur xml pour pouvoir lire flux rss
+	 * @package Config
+	 *  @author Antoine Viton, Adrien Coudour
+	 */
 	class Parseur{
-		
+			/**
+	 * Parseur xml pour pouvoir lire flux rss
+	 * @param lien lien où l'on va parser les news
+	 * @param idFlux id du flux à parser 
+	 * @return array Liste des news ainsi que leur date de mise à jour
+	 * @author Antoine Viton, Adrien Coudour
+	 */
 
 		function parser($lien, $idFlux) : array{
 			//var_dump($lien);

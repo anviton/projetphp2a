@@ -1,13 +1,16 @@
 <?php
-
-	/*require_once(__DIR__.'/../Modeles/ModelNews.php');
-	require_once(__DIR__.'/../Modeles/ModelAdmin.php');
-	require_once(__DIR__.'/../Config/config.php');*/
 	
-
+	/**
+	 * Class controleur utilisateur
+	 * @package Controleurs 
+	 * @author Antoine Viton, Adrien Coudour
+	 */
 	class ControleurUser
 	{
-		
+		/**
+		 * Constructeur du controleur Utilisateur
+		 * Recupération des exceptions et redirection selon l'action lancé par l'utilisateur
+		 */
 		function __construct() {
 			global $rep, $vues; 
 			// on démarre ou reprend la session
@@ -70,6 +73,11 @@
 			exit(0);
 		}//fin constructeur
 
+		/**
+		 * Méthode de l'initialisation de la connexion
+		 * Vérification du rôle de l'utilisateur
+		 * Redirection vers la vue Admin ou de la connexion si l'utilisateur n'est pas connecté
+		 */
 		function initConnexion(){
 			global $base_url;
 			if (isset($_SESSION['role'])) {
@@ -82,6 +90,12 @@
 			}
 		}
 
+		/**
+		 * Méthode de tentative de connexion
+		 * Récupération du mot de passe et du pseudonyme par un formulaire
+		 * Validation du mot de passe et du pseudo
+		 * Tentative de connexion en tant qu'administrateur
+		 */
 		function tentativeConnexion(){
 			$mdlAdmin = new ModelAdmin();
 			$motDePasse = $_REQUEST['motDePasse'] ?? null;
@@ -104,7 +118,12 @@
 
 		}
 
-
+		/**
+		 * Méthode d'initialisation
+		 * Définition de la page de la news affiché
+		 * Modification du nombre de news par page
+		 * Redirection vers la page d'accueil
+		 */
 		function init() {
 			global $rep, $vues /*, $base_url*/; 
 			$modeleNews = new ModelNews();
@@ -130,7 +149,9 @@
 			//var_dump($rep);
 			
 		}
-
+		/**
+		 * Méthode de déconnexion de l'administrateur
+		 */
 		function deconnexion(){
 			if (isset($_SESSION['role'])) {
 				$mdlAdmin = new ModelAdmin();
