@@ -60,5 +60,20 @@
 			}
 			return false;
 		}
+		/**
+		 * Méthode permmettant de vérifier si un flux existe en base
+		 * @param id : id du flux à vérifier
+		 * @return true si le flux existe false si le flux existe pas
+		 */
+		function fluxExisteParId($id):bool{
+			global $login, $dbs, $mdp;
+			$connect = new Connection($dbs, $login, $mdp);
+			$gFlux = new FluxGateway($connect);
+			$res = $gFlux->chercherUnFluxParId($id);
+			if (count($res) > 0 ) {
+				return true;
+			}
+			return false;
+		}
 
 	}

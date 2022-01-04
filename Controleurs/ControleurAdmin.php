@@ -60,6 +60,7 @@
 			} catch (PDOException $e){
 				//si erreur BD, pas le cas ici
 				$dVueEreur[] =	"Erreur inattendue de la base!!! ";
+				$dVueEreur[] = $e;
 				require(__DIR__.'/../Vues/VueErreurs.php');
 				//require ($rep.$vues['erreur']);
 
@@ -98,12 +99,12 @@
 		 */
 		function supprimer(){
 			$flux = $_REQUEST['flux'] ?? null;
-			var_dump($flux);
-			if ($flux == null) {
-				require($rep.$vues['erreur']);
+			$mdlFlux = new ModelFlux();
+			//var_dump($flux);
+			if ($flux == null || !$mdlFlux->fluxExisteParId($flux)) {
+				$dVueEreur[] =	"Le flux à supprimer n'existe pas ";
 			}
 			$mdlNews = new ModelNews();
-			$mdlFlux = new ModelFlux();
 			$mdlNews->supprimerNews($flux);
 			$mdlFlux->supprimerFlux($flux);
 			$rep = $mdlFlux->get_TousLesFlux();

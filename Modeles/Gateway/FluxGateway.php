@@ -80,6 +80,18 @@
 			}
 			return $listeFlux;
 		}
+
+		public function chercherUnFluxParId($id):array{
+			$listeFlux=[];
+			$requete='SELECT * FROM flux WHERE idFlux = :id';
+			if($this->connect->executeQuery($requete, array(':id' => array($id, PDO::PARAM_STR)))){
+				$resultats=$this->connect->getResults();
+				foreach ($resultats as $val) {
+					$listeFlux[]= new Flux($val['idFlux'], $val['nom'], $val['dateDerMaj']);
+				}
+			}
+			return $listeFlux;
+		}
 	}
 
 

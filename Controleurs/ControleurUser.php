@@ -130,9 +130,9 @@
 			$mdlConfig = new ModelConfiguration();
 			$nbNewsParPage = $mdlConfig->nombreDeNewsParPage();
 			$nbPagePasArrondi = $nbNews / $nbNewsParPage;
-			var_dump($nbPagePasArrondi);
+			//var_dump($nbPagePasArrondi);
 			$nbPage = ceil($nbPagePasArrondi);
-			var_dump($nbPage);
+			//var_dump($nbPage);
 			$numPageNews = $_REQUEST['numPageNews'] ?? null;
 			if (!isset($numPageNews) || $numPageNews > $nbPage || $numPageNews < 1) {
 				$numPageNews = 1;

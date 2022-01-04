@@ -35,9 +35,15 @@
 					</tbody>
 				</table>
 				<?php
-					for($i = 1; $i <= $nbPage; $i++){
+					/*for($i = 1; $i <= $nbPage; $i++){
 						echo "<a class='lien' href='index.php?numPageNews=$i' >$i</a> ";
-					}
+					}*/
+					$pageSuivante = $numPageNews + 1;
+					$pagePrécédente = $numPageNews - 1;
+					echo "<a class='lien' href='index.php?numPageNews=$pagePrécédente' >Page Précédente</a> ";
+					echo "<a class='lien' href='index.php?numPageNews=$numPageNews' >$numPageNews</a> ";
+					echo "<a class='lien' href='index.php?numPageNews=$pageSuivante' >Page Suivante</a> </br></br>";
+					echo "<a class='lien' href='index.php?numPageNews=$nbPage' >Dernière Page</a>";
 				?>
 			</div>
 		</section>
