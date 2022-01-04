@@ -28,8 +28,7 @@
 
 			try{
 			$action=$_REQUEST['action'] ?? null;
-			
-			//var_dump($action);
+
 			switch($action) {
 
 				case "supprimer":
@@ -100,7 +99,6 @@
 		private function supprimer(){
 			$flux = $_REQUEST['flux'] ?? null;
 			$mdlFlux = new ModelFlux();
-			//var_dump($flux);
 			if ($flux == null || !$mdlFlux->fluxExisteParId($flux)) {
 				$dVueEreur[] =	"Le flux à supprimer n'existe pas ";
 			}

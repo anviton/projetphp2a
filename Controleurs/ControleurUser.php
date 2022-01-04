@@ -23,7 +23,6 @@
 
 			try{
 			$action=$_REQUEST['action'] ?? null;
-			//var_dump($action);
 			switch($action) {
 
 			//pas d'action, on réinitialise 1er appel
@@ -130,9 +129,7 @@
 			$mdlConfig = new ModelConfiguration();
 			$nbNewsParPage = $mdlConfig->nombreDeNewsParPage();
 			$nbPagePasArrondi = $nbNews / $nbNewsParPage;
-			//var_dump($nbPagePasArrondi);
 			$nbPage = ceil($nbPagePasArrondi);
-			//var_dump($nbPage);
 			$numPageNews = $_REQUEST['numPageNews'] ?? null;
 			if (!isset($numPageNews) || $numPageNews > $nbPage || $numPageNews < 1) {
 				$numPageNews = 1;

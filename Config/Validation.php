@@ -14,16 +14,18 @@
 		 * @param string $chaine Chaîne que l'on souhaite vérifier/ valider
 		 * @return string chaîne filtrer et modifié ou message d'erreur
 		 */
-		function valideChaine($chaine): string{
+		function valideChaine(&$chaine,&$dvueEreur){
 			$chaine=ltrim($chaine); // enlève tous les espaces à gauche,
 			$chaine=rtrim($chaine); // enlève tous les espaces à droite
 			if (!isset($chaine)) {
-				return "chaine invalide";
+				$dvueEreur[] = "chaine invalide";
+				return false;
 			}
 			else if ($chaine != filter_var($chaine, FILTER_SANITIZE_STRING)){
-				return "Tentative d'injection";
+				$dvueEreur[] = "Tentative d'injection";
+				return false;
 			}
-			else return $chaine;
+			return true;
 		}
 		/**
 		 * Validation d'une adresse mail
