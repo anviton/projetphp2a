@@ -22,7 +22,7 @@
 		 * @param string $motdepasse utilisateur rentré par l'utilisateur
 		 * @return bool true si la connexion c'est bien déroulé sinon false
 		 */
-		function connexion($login1, $motDePasse):bool { // a corriger
+		function connexion($login1, $motDePasse):bool {
 			
 
 			global $login, $dbs, $mdp;

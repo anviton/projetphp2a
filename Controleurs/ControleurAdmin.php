@@ -75,7 +75,7 @@
 		 * Méthode permettant d'ajouter un flux
 		 * Récupèration du flux par un formulaire
 		 */
-		function ajouter(){
+		private function ajouter(){
 			$flux = $_REQUEST['flux'] ?? null;
 			$validation = new Validation();
 			$bool = $validation->valideAjoutFlux($flux, $dVueEreur);
@@ -97,7 +97,7 @@
 		 * Suppresion des news et du flux
 		 * Renvoie sur la vue Administrateur
 		 */
-		function supprimer(){
+		private function supprimer(){
 			$flux = $_REQUEST['flux'] ?? null;
 			$mdlFlux = new ModelFlux();
 			//var_dump($flux);
@@ -115,7 +115,7 @@
 		 * Change la configuration du model en fonction du nombre de news
 		 * Renvoie sur la vue Administrateur
 		 */
-		function modifierLeNombreDeNews(){
+		private function modifierLeNombreDeNews(){
 			$nbNews = $_REQUEST['nbNews'] ?? null;
 			$mdlConfig = new ModelConfiguration();
 			$mdlConfig->modifierLeNombreDeNews($nbNews);
@@ -126,7 +126,7 @@
 		/**
 		 * Méthode de mise à jour des news (les nouvelles news présentes dans les flux de la bases sont ajoutés dans le base)
 		 */
-		function mettreAJour(){
+		private function mettreAJour(){
 			require(__DIR__.'/../test.php');
 			$mdlFlux = new ModelFlux();
 			$rep = $mdlFlux->get_TousLesFlux();

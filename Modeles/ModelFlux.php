@@ -14,7 +14,7 @@
 		 * Récupération des flux
 		 * @return array liste de tous les flux
 		 */
-		function get_TousLesFlux():array{
+		public function get_TousLesFlux():array{
 			global $login, $dbs, $mdp;
 			$connect = new Connection($dbs, $login, $mdp);
 			$gFlux = new FluxGateway($connect);
@@ -27,7 +27,7 @@
 		 * Ajout de ce flux
 		 * @param string $lien Chemin du nouveau flux
 		 */
-		function ajouterFlux($lien){
+		public function ajouterFlux($lien){
 			global $login, $dbs, $mdp;
 			$connect = new Connection($dbs, $login, $mdp);
 			$gFlux = new FluxGateway($connect);
@@ -39,7 +39,7 @@
 		 * Suppresion du flux
 		 * @param string $lien lien du flux que l'on souhaite supprimer
 		 */
-		function supprimerFlux($lien){
+		public function supprimerFlux($lien){
 			global $login, $dbs, $mdp;
 			$connect = new Connection($dbs, $login, $mdp);
 			$gFlux = new FluxGateway($connect);
@@ -50,7 +50,7 @@
 		 * @param lien : lien du flux à vérifier
 		 * @return true si le flux existe false si le flux existe pas
 		 */
-		function fluxExiste($lien):bool{
+		public function fluxExiste($lien):bool{
 			global $login, $dbs, $mdp;
 			$connect = new Connection($dbs, $login, $mdp);
 			$gFlux = new FluxGateway($connect);
@@ -65,7 +65,7 @@
 		 * @param id : id du flux à vérifier
 		 * @return true si le flux existe false si le flux existe pas
 		 */
-		function fluxExisteParId($id):bool{
+		public function fluxExisteParId($id):bool{
 			global $login, $dbs, $mdp;
 			$connect = new Connection($dbs, $login, $mdp);
 			$gFlux = new FluxGateway($connect);

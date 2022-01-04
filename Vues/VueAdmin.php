@@ -37,7 +37,7 @@
 				<form method="post" action="<?= 'index.php?action=ajouter'?>">
 					<?php if (isset($dVueEreur)) {
 					foreach ($dVueEreur as $value) { ?>
-					<p><?= $value ?></p>
+					<p class="erreur"><?= $value ?></p>
 					<?php }} ?>
 					<p>
 						<label for="pseudo">Nom du flux à ajouter :</label>

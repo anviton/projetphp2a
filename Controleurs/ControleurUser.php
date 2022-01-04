@@ -123,7 +123,7 @@
 		 * Définition de la page de la news affiché
 		 * Redirection vers la page d'accueil
 		 */
-		function init() {
+		private function init() {
 			global $rep, $vues /*, $base_url*/; 
 			$modeleNews = new ModelNews();
 			$nbNews = $modeleNews->nombreDeNews();
@@ -144,7 +144,7 @@
 		/**
 		 * Méthode de déconnexion de l'administrateur
 		 */
-		function deconnexion(){
+		private function deconnexion(){
 			if (isset($_SESSION['role'])) {
 				$mdlAdmin = new ModelAdmin();
 				$mdlAdmin->deconnexion();
