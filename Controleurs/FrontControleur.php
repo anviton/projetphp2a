@@ -1,9 +1,4 @@
 <?php
-
-	/*require_once(__DIR__.'/../Modeles/ModelNews.php');
-	require_once(__DIR__.'/../Config/config.php');
-	require_once(__DIR__.'/../Modeles/ModelAdmin.php');
-	require_once(__DIR__.'/ControleurUser.php');*/
 	
 	/**
 	 * Class Front controleur
@@ -22,25 +17,31 @@
 			// on démarre ou reprend la session
 			session_start();
 
-			//debut
-
 			//on initialise un tableau d'erreur
 			$dVueEreur = array ();
 			$mdlAdmin = new ModelAdmin();
 			try{
 				$admin = $mdlAdmin->isAdmin(); 
 				$action=$_REQUEST['action'] ?? null;
-				if(in_array($action, $listeAction_Admin)) {
-					if ($admin == false) {
-						require(__DIR__.'/../Vues/connexionAdmin.php');
+				//var_dump($action);
+				$validation = new Validation();
+				$bool = $validation->valideChaine($action, $dVueEreur);
+				if ($bool){ 
+					if(in_array($action, $listeAction_Admin)) {
+						if ($admin == false) {
+							require(__DIR__.'/../Vues/connexionAdmin.php');
+						}
+						else{
+							new ControleurAdmin();
+						}
 					}
 					else{
-						 new ControleurAdmin();
+						new ControleurUser();
 					}
 				}
 				else{
-					new ControleurUser();
-				}
+					require(__DIR__.'/../Vues/VueErreurs.php');
+				} 
 			}catch (PDOException $e){
 				//si erreur BD, pas le cas ici
 				$dVueEreur[] =	"Erreur inattendue!!! ";
