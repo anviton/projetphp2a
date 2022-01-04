@@ -23,10 +23,7 @@
 		 * @return bool true si la connexion c'est bien déroulé sinon false
 		 */
 		function connexion($login1, $motDePasse):bool {
-			
-
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gAdmin = new AdminGateway($connect);
 			$res=$gAdmin->selectionnerUnAdmin($login1);
 			if($res == null){
@@ -74,10 +71,7 @@
 		 * @return Admin renvoie l'administrateur connecté
 		 */
 		function get_unAdmin($loginRech): Admin {
-			//$login="anviton";
-			//$mdp="VitonMyAdmin";
-			//$dbs="mysql:host=localhost;dbname=dbanviton";
-			global $login, $dbs, $mdp;
+			$connect = Connection::getInstance();
 			$connect = new Connection($dbs, $login, $mdp);
 			$gAdmin = new AdminGateway($connect);
 			$res = $gAdmin->selectionnerUnAdmin($loginRech);

@@ -15,8 +15,7 @@
 		 * @return array liste de tous les flux
 		 */
 		public function get_TousLesFlux():array{
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gFlux = new FluxGateway($connect);
 			$res = $gFlux->listerTousLesFlux();
 			return $res;
@@ -28,8 +27,7 @@
 		 * @param string $lien Chemin du nouveau flux
 		 */
 		public function ajouterFlux($lien){
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gFlux = new FluxGateway($connect);
 			$res = $gFlux->ajoutrerUnFlux($lien);
 		}
@@ -40,8 +38,7 @@
 		 * @param string $lien lien du flux que l'on souhaite supprimer
 		 */
 		public function supprimerFlux($lien){
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gFlux = new FluxGateway($connect);
 			$res = $gFlux->supprimerUnFlux($lien);
 		}
@@ -51,8 +48,7 @@
 		 * @return true si le flux existe false si le flux existe pas
 		 */
 		public function fluxExiste($lien):bool{
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gFlux = new FluxGateway($connect);
 			$res = $gFlux->chercherUnFlux($lien);
 			if (count($res) > 0 ) {
@@ -66,8 +62,7 @@
 		 * @return true si le flux existe false si le flux existe pas
 		 */
 		public function fluxExisteParId($id):bool{
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gFlux = new FluxGateway($connect);
 			$res = $gFlux->chercherUnFluxParId($id);
 			if (count($res) > 0 ) {

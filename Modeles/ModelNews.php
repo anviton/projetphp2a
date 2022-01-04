@@ -15,8 +15,7 @@
 		 * @return array liste de toutes les news
 		 */
 		public function get_ToutesLesNews():array{
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gNews = new NewsGateway($connect);
 			$res = $gNews->listerToutesLesNews();
 			return $res;
@@ -28,8 +27,7 @@
 		 * @return array liste des news de la page
 		 */
 		public function getNewsPage($numPageNews) : array {
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gNews = new NewsGateway($connect);
 			$res = $gNews->listerLesNewsDeLaPage($numPageNews);
 			return $res;
@@ -40,8 +38,7 @@
 		 * @return int Nombre de news 
 		 */
 		public function nombreDeNews(): int{
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gNews = new NewsGateway($connect);
 			$res = $gNews->compterLesNews();
 			return $res;
@@ -53,8 +50,7 @@
 		 * @param $int id de la news à supprimer
 		 */
 		public function supprimerNews($id){
-			global $login, $dbs, $mdp;
-			$connect = new Connection($dbs, $login, $mdp);
+			$connect = Connection::getInstance();
 			$gNews = new NewsGateway($connect);
 			$gNews->supprimerLesNewsDUnFlux($id);
 		}

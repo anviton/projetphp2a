@@ -7,18 +7,26 @@
 class Connection extends PDO { 
 
 private $stmt;
+private $connection;
 /**
  * Constructeur de la classe connection
  * @param string $dsn Lien en direction de la base de donnée
  * @param string $username Pseudonyme de la base de donnée
  * @param string $password Mot de passe de la base de donnée
  */
-public function __construct(string $dsn, string $username, string $password) { 
+private function __construct(string $dsn, string $username, string $password) { 
 
     parent::__construct($dsn,$username,$password); 
     $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } 
- 
+
+public static function getInstance(){
+    if ($connection ?? null == null) {
+        global $login, $dbs, $mdp;
+        $connection = new Connection($dbs, $login, $mdp);
+    }
+    return $connection;
+}
 
 /** 
  * Méthode d'execution de l'ordre
