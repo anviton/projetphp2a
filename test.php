@@ -13,7 +13,7 @@
 
 	//$user="anviton";
 	//$pass="VitonMyAdmin";
-	$connect= new Connection($dbs, $login, $mdp);
+	$connect= Connection::getInstance();
 
 	/*$gFlux= new FluxGateway($connect);
 	//$gFlux->ajoutrerUnFlux("https://www.linternaute.com/rss/");
@@ -47,7 +47,7 @@
 	foreach($lesFlux as $flux){
 		$tuple = $pars->parser($flux->titre, $flux->idFlux);
 		//$date = date_create($tuple[0]);
-		var_dump($tuple[0]);
+		//var_dump($tuple[0]);
 		$newDate = DateTime::createFromFormat('D, d M Y H:i:s P', $tuple[0]);
 		$newDate = $newDate->format('Y-m-d H:i:s');
 		//var_dump($newDate);

@@ -2,7 +2,7 @@
 	
 
 	
-	require_once(__DIR__.'/../Modeles/Metier/News.php');
+	//require_once(__DIR__.'/../Modeles/Metier/News.php');
 	/**
 	 * Parseur xml pour pouvoir lire flux rss
 	 * @package Config

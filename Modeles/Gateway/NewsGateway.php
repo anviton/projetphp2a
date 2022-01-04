@@ -66,13 +66,13 @@
 			$listeNews;
 			//echo "$numPageNews";
 			$nbLigne = $this->compterLesNews();
-			var_dump($nbLigne);
+			//var_dump($nbLigne);
 			$mdlConfig = new ModelConfiguration();
 			$nbNewsParPage = $mdlConfig->nombreDeNewsParPage();
 			//var_dump($nbNewsParPage);
 			//$nbNewsParPage = 10;
 			$nbPage = ceil($nbLigne / $nbNewsParPage);
-			$requete='SELECT * FROM news LIMIT :nbNews OFFSET  :of';
+			$requete='SELECT * FROM news ORDER BY heure LIMIT :nbNews OFFSET  :of';
 			if ($nbPage == $numPageNews) {
 				//echo "Coucou";
 				$nbNews = $nbLigne-$nbNewsParPage*($numPageNews-1);

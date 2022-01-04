@@ -1,7 +1,15 @@
+html {
+  height: 100%;
+}
+
 body
 {
 	/*background: url("news.png") fixed;*/
 	background-color: rgba(255,255,255,0.8);
+	position: relative;
+	min-height: 100%;
+  	margin: 0;
+  	padding: 0;
 	/*background-color: black;*/
 }
 
@@ -83,5 +91,12 @@ h1{
 .erreur{
 	font-size: 20px;
 	color: red;
+}
+
+footer{
+
+	background:#ccc;
+	bottom:0;
+	width:100%;
 }
 

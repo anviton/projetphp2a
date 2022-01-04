@@ -14,7 +14,7 @@
 		 * @param string $chaine Chaîne que l'on souhaite vérifier/ valider
 		 * @return string chaîne filtrer et modifié ou message d'erreur
 		 */
-		function valideChaine(&$chaine,&$dvueEreur){
+		public function valideChaine(&$chaine,&$dvueEreur){
 			$chaine=ltrim($chaine); // enlève tous les espaces à gauche,
 			$chaine=rtrim($chaine); // enlève tous les espaces à droite
 			if (!isset($chaine)) {
@@ -32,7 +32,7 @@
 		 * @param string $email Chaine de caractère que l'on souhaite vérifié
 		 * @return string email vérifié ou message d'erreur
 		 */
-		function valideEmail($email): string{
+		public function valideEmail($email): string{
 			if (filter_var($email, FILTER_VALIDATE_EMAIL)){
 				return $email;
 			}
@@ -46,7 +46,7 @@
 		 * @param int $age Age que l'on souhaite vérifié
 		 * @return string l'âge vérifié ou message d'erreur
 		 */
-		function valideAge($age): string{
+		public function valideAge($age): string{
 			if (isset($age) || !filter_var($age,FILTER_SANITIZE_NUMBER_INT)) {
 				if ($age >= 0  && $age<150 ) {
 					return $age;
@@ -67,41 +67,47 @@
 		 * @param string $mdp mot de passe rentré par l'utilisateur que l'on souhaite validé
 		 * @param array $dvueEreur tableau de l'erreur avec le message d'erreur
 		 */
-		static function validemdp(&$mdp,&$dvueEreur){
+		public static function validemdp(&$mdp,&$dvueEreur) : bool{
 			// Partie mot de passe
 			$mdp = ltrim($mdp);
 			if (!isset($mdp)) {
 				$dvueEreur[] = "Rentrez un mot de passe";
+				return false;
 			}
 			else if ($mdp != filter_var($mdp, FILTER_SANITIZE_STRING)) {
 				$dvueEreur[] = "Caractère invalide";
+				return false;
 			}
 			else if (strlen($mdp) < 8) {
 				$dvueEreur[] = " Longueur mot de passe <8";
+				return false;
 			}
-			//$mdp = "";
+			return true;
 		}
 		/**
 		 * Validation d'un pseudonyme 
 		 * @param string $pseudo pseudonyme rentré par l'utilisateur que l'on souhaite vérifié
 		 * @param array $dvueEreur tableau d'erreur avec le message d'erreur
 		 */
-		function validepseudo(&$pseudo,&$dvueEreur){
+		public function validepseudo(&$pseudo,&$dvueEreur) : bool{
 			// Partie pseudonyme
 			$pseudo=ltrim($pseudo);
 			if (!isset($pseudo)){
 				$dvueEreur[]= "Rentrer un pseudonyme";
+				return false;
 			}
 			else if ($pseudo != filter_var($pseudo, FILTER_SANITIZE_STRING)) {
 				$dvueEreur[] = " Contient des caractères invalides";
+				return false;
 			}
+			return true;
 		}
 		/**
 		 * Validation du nombre de vue que l'on souhaite avoir sur une page
 		 * @param string $nbVuePrinc Nombre de veu que l'on souhaite valider
 		 * @param array $dvueEreur Message d'erreur si il y en a l'utilité
 		 */
-		function valideNbVuePrincipale(&$nbVuePrinc,&$dvueEreur){
+		public function valideNbVuePrincipale(&$nbVuePrinc,&$dvueEreur){
 			if (!isset($nbVuePrinc)){
 				$dvueEreur[] = " Rentrer un nombre de vue";
 			}
@@ -118,7 +124,7 @@
 		 * @param string $format
 		 * @return bool true si la date est valide sinon false
 		 */
-		function validateDate($date, $format = 'Y-m-d H:i:s'){
+		public function validateDate($date, $format = 'Y-m-d H:i:s'){
 			$d = DateTime::createFromFormat($format, $date);
 			return $d && $d->format($format) == $date;
 		}
@@ -127,7 +133,7 @@
 		 * @param string $flux flux à tester et a valider
 		 * @param array $dvueEreur message d'erreur si il y a un problème
 		 */
-		function valideAjoutFlux(&$flux,&$dvueEreur):bool{
+		public function valideAjoutFlux(&$flux,&$dvueEreur):bool{
 			if (!filter_var($flux, FILTER_VALIDATE_URL)){
 				$dvueEreur[] = " Flux invalide ";
 				return false;

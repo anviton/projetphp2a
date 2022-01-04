@@ -56,7 +56,5 @@
 			</div>
 		</section>
 	</body>
-	<footer>
-		<p>Viton Antoine, Coudour Adrien, Dut informatique Groupe 7</p>
-	</footer>
+	<?php include("Footer.php")?>
 </html>

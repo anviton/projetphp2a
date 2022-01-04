@@ -59,11 +59,13 @@
 			} catch (PDOException $e){
 				//si erreur BD, pas le cas ici
 				$dVueEreur[] =	"Erreur inattendue!!! ";
+				require(__DIR__.'/../Vues/VueErreurs.php');
 				//require ($rep.$vues['erreur']);
 
 			}
 			catch (Exception $e2){
 				$dVueEreur[] =	"Erreur inattendue!!! ";
+				require(__DIR__.'/../Vues/VueErreurs.php');
 				//require ($rep.$vues['erreur']);
 			}
 
@@ -78,7 +80,6 @@
 		 * Redirection vers la vue Admin ou de la connexion si l'utilisateur n'est pas connecté
 		 */
 		function initConnexion(){
-			global $base_url;
 			if (isset($_SESSION['role'])) {
 				$mdlFlux = new ModelFlux();
 				$rep = $mdlFlux->get_TousLesFlux();
@@ -101,20 +102,24 @@
 			$pseudo = $_REQUEST['pseudo'] ?? null;
 
 			$valide = new Validation();
-			$valide->validemdp($motDePasse, $dVueEreur);
-			$valide->validepseudo($pseudo, $dVueEreur);
+			$valPseudo = $valide->validemdp($motDePasse, $dVueEreur);
+			$valMdp = $valide->validepseudo($pseudo, $dVueEreur);
 
-			$err = $mdlAdmin->connexion($pseudo, $motDePasse);
-			if($err == true){
-				$mdlFlux = new ModelFlux();
-				$rep = $mdlFlux->get_TousLesFlux();
-				require(__DIR__.'/../Vues/VueAdmin.php');
+			if ($valPseudo == true && $valMdp == true) {
+				$err = $mdlAdmin->connexion($pseudo, $motDePasse);
+				if($err == true){
+					$mdlFlux = new ModelFlux();
+					$rep = $mdlFlux->get_TousLesFlux();
+					require(__DIR__.'/../Vues/VueAdmin.php');
+				}
+				else{
+					$dVueEreur[] = "Erreur mot de passe ou login";
+					require(__DIR__.'/../Vues/connexionAdmin.php');
+				}
 			}
 			else{
-				$dVueEreur[] = "Erreur mot de passe ou login";
 				require(__DIR__.'/../Vues/connexionAdmin.php');
 			}
-
 		}
 
 		/**

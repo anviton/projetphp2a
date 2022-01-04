@@ -26,10 +26,8 @@
 				</div>
 			</section>
 		</div>
-		</main>
-			<footer>
-				<p>Viton Antoine Dut informatique Groupe 7</p>
-			</footer>	
+		</main>	
 		</div>	
 	</body>
+	<?php include("Footer.php")?>
 </html>
