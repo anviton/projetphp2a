@@ -19,7 +19,10 @@ private function __construct(string $dsn, string $username, string $password) {
     parent::__construct($dsn,$username,$password); 
     $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } 
-
+/**
+ * Getter de l'instance de connexion
+ * @return Connection $connection retourne une instance de connexion
+ */
 public static function getInstance(){
     if ($connection ?? null == null) {
         global $login, $dbs, $mdp;
