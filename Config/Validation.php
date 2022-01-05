@@ -68,7 +68,7 @@
 		 * @param string $mdp mot de passe rentré par l'utilisateur que l'on souhaite validé
 		 * @param array $dvueEreur tableau de l'erreur avec le message d'erreur
 		 */
-		public static function validemdp(&$mdp,&$dvueEreur) : bool{
+		public function validemdp(&$mdp,&$dvueEreur) : bool{
 			// Partie mot de passe
 			$mdp = ltrim($mdp);
 			if (!isset($mdp)) {
