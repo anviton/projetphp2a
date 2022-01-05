@@ -148,6 +148,10 @@
 				$dvueEreur[] = " Rentrer un nom de flux à ajouter";
 				return false;
 			}
+			else if ($flux != filter_var($flux, FILTER_SANITIZE_STRING)) {
+				$dvueEreur[] = " Contient des caractères invalides";
+				return false;
+			}
 			return true;
 		}
 	}
