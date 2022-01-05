@@ -12,9 +12,10 @@
 		/**
 		 * Validation d'une chaîne de caractère quelconque
 		 * @param string $chaine Chaîne que l'on souhaite vérifier/ valider
-		 * @return string chaîne filtrer et modifié ou message d'erreur
+		 * @param &$dvueEreur tableau d'erreur
+		 * @return true si la chaine est valide et false si la chaine est invalide
 		 */
-		public function valideChaine(&$chaine,&$dvueEreur){
+		public function valideChaine(&$chaine,&$dvueEreur):bool{
 			$chaine=ltrim($chaine); // enlève tous les espaces à gauche,
 			$chaine=rtrim($chaine); // enlève tous les espaces à droite
 			if (!isset($chaine)) {
@@ -106,20 +107,25 @@
 		 * Validation du nombre de vue que l'on souhaite avoir sur une page
 		 * @param string $nbVuePrinc Nombre de veu que l'on souhaite valider
 		 * @param array $dvueEreur Message d'erreur si il y en a l'utilité
+		 * @return bool true si nombre valide false sinon
 		 */
 		public function valideNbVuePrincipale(&$nbVuePrinc,&$dvueEreur){
 			if (!isset($nbVuePrinc)){
 				$dvueEreur[] = " Rentrer un nombre de vue";
+				return false;
 			}
 			else if (!filter_var($nbVuePrinc,FILTER_SANITIZE_NUMBER_INT)){
 				$dvueEreur[] = " Ne peux pas posséder de caractères";
+				return false;
 				}
-				else if ($nbVuePrinc<=0){
-					$dvueEreur[] = " Le nombre de vue d'une page ne peux pas être inférieur à 1";
-				}
+			else if ($nbVuePrinc<=0){
+				$dvueEreur[] = " Le nombre de vue d'une page ne peut pas être inférieur à 1";
+				return false;
+			}
+			return true;
 		}
 		/**
-		 * Méthode de validation d'une date en base de donnée
+		 * Méthode de validation d'une date en base de données
 		 * @param string $date
 		 * @param string $format
 		 * @return bool true si la date est valide sinon false

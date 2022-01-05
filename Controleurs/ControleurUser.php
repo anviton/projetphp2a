@@ -42,12 +42,6 @@
 				case "deconnexion":
 					$this->deconnexion();
 					break;
-
-				case "validationFormulaire":
-					//$this->ValidationFormulaire($dVueEreur);
-					break;
-				
-
 				//mauvaise action
 				default:
 					$dVueEreur[] =	"Erreur d'appel php";
@@ -128,7 +122,8 @@
 		 * Redirection vers la page d'accueil
 		 */
 		private function init() {
-			global $rep, $vues /*, $base_url*/; 
+			global $rep, $vues;
+			$rep = null;
 			$modeleNews = new ModelNews();
 			$nbNews = $modeleNews->nombreDeNews();
 			$mdlConfig = new ModelConfiguration();
@@ -139,8 +134,10 @@
 			if (!isset($numPageNews) || $numPageNews > $nbPage || $numPageNews < 1) {
 				$numPageNews = 1;
 			}
-			$rep = $modeleNews->getNewsPage($numPageNews);
-			$rep = array_reverse($rep);
+			if($nbNews > 0){
+				$rep = $modeleNews->getNewsPage($numPageNews);
+				$rep = array_reverse($rep);
+			}
 			require(__DIR__.'/../Vues/pageDAccueil.php');			
 		}
 		/**

@@ -5,6 +5,12 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	</head>
 	<body>
+		<?php 
+		$cache = 'hidden';
+		if (isset($_SESSION['role'])) {
+			$cache = null;
+		}
+		?>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <div class="container-fluid">
 		  	 <a class="navbar-brand" href="#">
@@ -18,7 +24,7 @@
 		      <div class="navbar-nav">
 		        <a class="nav-link active" aria-current="page" href="<?= 'index.php'?>">Accueil</a>
 		        <a class="nav-link" href="<?= 'index.php?action=connexion'?>">Admin</a>
-		        <a class="nav-link" href="<?= 'index.php?action=deconnexion'?>">Deconnexion</a>
+		        <a class="nav-link" <?= $cache ?> href="<?= 'index.php?action=deconnexion'?>">Deconnexion</a>
 		        <a class="nav-link disabled"></a>
 		      </div>
 		    </div>

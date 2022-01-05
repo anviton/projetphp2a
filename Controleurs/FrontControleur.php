@@ -23,15 +23,16 @@
 			try{
 				$admin = $mdlAdmin->isAdmin(); 
 				$action=$_REQUEST['action'] ?? null;
-				//var_dump($action);
 				$validation = new Validation();
 				$bool = $validation->valideChaine($action, $dVueEreur);
+
 				if ($bool){ 
 					if(in_array($action, $listeAction_Admin)) {
 						if ($admin == false) {
 							require(__DIR__.'/../Vues/connexionAdmin.php');
 						}
 						else{
+							
 							new ControleurAdmin();
 						}
 					}
@@ -44,7 +45,7 @@
 				} 
 			}catch (PDOException $e){
 				//si erreur BD, pas le cas ici
-				$dVueEreur[] =	"Erreur inattendue!!! ";
+				$dVueEreur[] =	"Erreur inattendue en BD!!! ";
 				require(__DIR__.'/../Vues/VueErreurs.php');
 				//require ($rep.$vues['erreur']);
 

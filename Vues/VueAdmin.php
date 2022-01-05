@@ -39,6 +39,10 @@
 					foreach ($dVueEreur as $value) { ?>
 					<p class="erreur"><?= $value ?></p>
 					<?php }} ?>
+					<?php
+					if (isset($info)) { ?>
+						<p><?= $info ?></p>
+					<?php } ?>
 					<p>
 						<label for="pseudo">Nom du flux à ajouter :</label>
 						<input class="form-control" type="texte" name="flux" id="flux" size="100" maxlength="100" required /><br/></br>

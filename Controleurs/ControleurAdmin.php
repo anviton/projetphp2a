@@ -76,19 +76,21 @@
 		 */
 		private function ajouter(){
 			$flux = $_REQUEST['flux'] ?? null;
+			$info = null;
+			$dVueEreur = null;
 			$validation = new Validation();
 			$bool = $validation->valideAjoutFlux($flux, $dVueEreur);
 			$mdlFlux = new ModelFlux();
 			if($bool){
 				if (!$mdlFlux->fluxExiste($flux)) {
+					$info = "Flux ajouté";
 					$mdlFlux->ajouterFlux($flux);
 				}
 				else{
 					$dVueEreur[] = "Flux déjà présent";
 				}
 			}
-			$rep = $mdlFlux->get_TousLesFlux();
-			require(__DIR__.'/../Vues/VueAdmin.php');
+			$this->recupFlux($info, $dVueEreur);
 		}
 		/**
 		 * Méthode permettant de supprimer un flux
@@ -98,15 +100,19 @@
 		 */
 		private function supprimer(){
 			$flux = $_REQUEST['flux'] ?? null;
+			$dVueEreur = null;
+			$info = null;
 			$mdlFlux = new ModelFlux();
 			if ($flux == null || !$mdlFlux->fluxExisteParId($flux)) {
 				$dVueEreur[] =	"Le flux à supprimer n'existe pas ";
 			}
-			$mdlNews = new ModelNews();
-			$mdlNews->supprimerNews($flux);
-			$mdlFlux->supprimerFlux($flux);
-			$rep = $mdlFlux->get_TousLesFlux();
-			require(__DIR__.'/../Vues/VueAdmin.php');
+			else{
+				$info = "Flux supprimé";
+				$mdlNews = new ModelNews();
+				$mdlNews->supprimerNews($flux);
+				$mdlFlux->supprimerFlux($flux);
+			}
+			$this->recupFlux($info, $dVueEreur);
 		}
 		/**
 		 * Méthode qui modifie le nombre de news par page
@@ -115,17 +121,29 @@
 		 */
 		private function modifierLeNombreDeNews(){
 			$nbNews = $_REQUEST['nbNews'] ?? null;
-			$mdlConfig = new ModelConfiguration();
-			$mdlConfig->modifierLeNombreDeNews($nbNews);
-			$mdlFlux = new ModelFlux();
-			$rep = $mdlFlux->get_TousLesFlux();
-			require(__DIR__.'/../Vues/VueAdmin.php');
+			$info = null;
+			$dVueEreur = null;
+			$validation = new Validation();
+			$bool = $validation->valideNbVuePrincipale($nbNews, $dVueEreur);
+			if ($bool) {
+				$mdlConfig = new ModelConfiguration();
+				$mdlConfig->modifierLeNombreDeNews($nbNews);
+				$info = "Le nombre de news par page a été modifiéé";
+			}
+			$this->recupFlux($info, $dVueEreur);
 		}
 		/**
 		 * Méthode de mise à jour des news (les nouvelles news présentes dans les flux de la bases sont ajoutés dans le base)
 		 */
 		private function mettreAJour(){
-			require(__DIR__.'/../test.php');
+			require(__DIR__.'/../script.php');
+			$info = "Mise à jour effectuée";
+			$this->recupFlux($info, null);
+		}
+		/**
+		 * Méthode qui permet de récupérer tous les flux
+		 */
+		private function recupFlux($info, $dVueEreur){
 			$mdlFlux = new ModelFlux();
 			$rep = $mdlFlux->get_TousLesFlux();
 			require(__DIR__.'/../Vues/VueAdmin.php');

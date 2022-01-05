@@ -20,7 +20,7 @@
 					</thead>
 					<tbody>
 						<?php 
-							if(isset($rep)){
+							if(isset($rep) && sizeof($rep)!= 0){
 								foreach ($rep as $value) { ?>
 						<tr>
 							<th scope="row"><?php 
